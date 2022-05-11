@@ -8,13 +8,28 @@ def lambda_handler(event, context):
     
     try:
         id = event["queryStringParameters"]["id"]
-        class_id = event["queryStringParameters"]["class"]
     except:
         return {
             'statusCode': 404,
-            'body': json.dumps("ERROR: id or class parameters not specified.")
+            'body': json.dumps("ERROR: id parameter not specified.")
         }
     
+    user_asked_for_class = True
+    
+    try:
+        class_id = event["queryStringParameters"]["class"]
+    except:
+        user_asked_for_class = False
+    
+    if not(user_asked_for_class):
+        try:
+            organisation_id = event["queryStringParameters"]["organisation"]
+        except:
+            return {
+                'statusCode': 404,
+                'body': json.dumps("ERROR: organisation or id parameter needed")
+            }
+            
     try:
         fileName = "race" + str(id)
         filePath = "races/" + fileName + "/" + fileName + ".xml"
@@ -25,12 +40,16 @@ def lambda_handler(event, context):
             'statusCode': 500,
             'body': json.dumps("ERROR: Id not found.")
         }
-    
     root = ET.fromstring(xmlstr)
     _ns = {'':'http://www.orienteering.org/datastandard/3.0'}
-    class_names_elements = root.findall("./ClassResult/Class[Id='" + class_id + "']/../PersonResult", _ns)
+    
+    if user_asked_for_class:
+        class_names_elements = root.findall("./ClassResult/Class[Id='" + class_id + "']/../PersonResult", _ns)
+    else:
+        class_names_elements = root.findall("./ClassResult/PersonResult/Organisation[Id='" + organisation_id + "']/..", _ns)
+        
     person_results = [x for x in class_names_elements]
-    ranks = []
+    response = []
     for p in person_results:
         surname = p.find('./Person/Name/Family', _ns).text
         name = p.find('./Person/Name/Given', _ns).text
@@ -43,9 +62,9 @@ def lambda_handler(event, context):
         p_result["position"] = position
         p_result["time"] = time
         
-        ranks.append(p_result)
+        response.append(p_result)
     
     return {
         'statusCode': 200,
-        'body': json.dumps(ranks)
+        'body': json.dumps(response)
     }
