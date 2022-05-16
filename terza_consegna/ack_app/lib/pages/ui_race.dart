@@ -24,11 +24,8 @@ class _RaceState extends State<UI_Race> {
     List<String> routeTitles = [];
     List<StatefulWidget> routeWidgets = [];
 
-    routeWidgets.add(UI_Home());
-    routeTitles.add("Home 1");
-
-    routeWidgets.add(UI_RaceClasses("2"));
-    routeTitles.add("RaceClasses 2");
+    routeWidgets.add(UI_RaceClasses(widget.raceId));
+    routeTitles.add("Categorie");
 
     return _getScaffold(widget.raceName, widget.raceId, routeWidgets, routeTitles);
   }

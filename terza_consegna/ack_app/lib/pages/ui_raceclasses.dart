@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import '../api.dart';
-
+import './ui_classresults.dart';
 class UI_RaceClasses extends StatefulWidget {
   final String raceid;
   const UI_RaceClasses(this.raceid, {Key? key}) : super(key: key);
@@ -21,16 +21,16 @@ class _RaceClassesState extends State<UI_RaceClasses> {
 
   @override
   Widget build(BuildContext context) {
-    return _getScaffold(futureClasses);
+    return _getScaffold(futureClasses, widget.raceid);
   }
 }
 
 
-Scaffold _getScaffold(Future<List<String>> futureClasses)
+Scaffold _getScaffold(Future<List<String>> futureClasses, String raceid)
 {
   return Scaffold(
     appBar: AppBar(
-      title: const Text('Classes 1'),
+      title: const Text('Categorie'),
     ),
     body: Center(
       child: FutureBuilder<List<String>>(
@@ -39,15 +39,29 @@ Scaffold _getScaffold(Future<List<String>> futureClasses)
           if (snapshot.hasData) {
             List<String> classes = snapshot.data!;
             return ListView.builder(
-                itemCount: classes.length,
-                itemBuilder: ((context, index) => Text(classes[index])));
+              itemCount: classes.length,
+              itemBuilder: ((context, index) => ElevatedButton( //Text(classes[index])));
+                onPressed: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          UI_ClassResults(raceid, classes[index]), //HARDCODE  classes[index]["_id"]""),
+                    ),
+                  );
+                },
+                child: Text(classes[index]),
+              )),
+            );
           } else if (snapshot.hasError) {
             return Text('${snapshot.error}');
           }
+
           // By default, show a loading spinner.
           return const CircularProgressIndicator();
         },
       ),
     ),
   );
+
 }
