@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:ack_app/athletes_route.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -41,7 +42,7 @@ class _ClassesRouteState extends State<ClassesRoute> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Classes 1'),
+        title: const Text('Categorie'),
       ),
       body: Center(
         child: FutureBuilder<List<String>>(
@@ -51,7 +52,19 @@ class _ClassesRouteState extends State<ClassesRoute> {
               List<String> classes = snapshot.data!;
               return ListView.builder(
                   itemCount: classes.length,
-                  itemBuilder: ((context, index) => Text(classes[index])));
+                  itemBuilder: ((context, index) => ElevatedButton( //Text(classes[index])));
+                      onPressed: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                AthletesRoute(classes[index],widget.raceid), //HARDCODE  classes[index]["_id"]""),
+                          ),
+                        );
+                      },
+                      child: Text(classes[index]),
+                  )),
+              );
             } else if (snapshot.hasError) {
               return Text('${snapshot.error}');
             }

@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 
 import './globals.dart';
 import './classes_route.dart';
+import './athletes_route.dart';
 
 Future<List<Map<String, dynamic>>> fetchRaces() async {
   final response = await http.get(Uri.parse('$apiUrl/list_races'));
@@ -48,7 +49,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Available races'),
+        title: const Text('gare disponibili'),
       ),
       body: Center(
         child: FutureBuilder<List<Map<String, dynamic>>>(
@@ -56,6 +57,7 @@ class _MyAppState extends State<MyApp> {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               var classes = snapshot.data!;
+
               return ListView.builder(
                 itemCount: classes.length,
                 itemBuilder: ((context, index) => ElevatedButton(
@@ -64,11 +66,12 @@ class _MyAppState extends State<MyApp> {
                       context,
                       MaterialPageRoute(
                         builder: (context) =>
-                            ClassesRoute(classes[index]["_id"]),
+                            ClassesRoute(classes[index]["_id"]), //AthletesRoute(,classes[index]["_id"]),
                       ),
                     );
                   },
-                  child: Text(classes[index]["race_name"]),
+                  child: Text(classes[index]["race_name"]), //
+
                 )),
               );
             } else if (snapshot.hasError) {
