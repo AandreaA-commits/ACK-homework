@@ -1,3 +1,4 @@
+import 'ui_race.dart';
 import 'package:flutter/material.dart';
 import 'ui_raceclasses.dart';
 import '../api.dart';
@@ -46,7 +47,8 @@ Scaffold _getScaffold(Future<List<Map<String, dynamic>>> futureRaces)
                     context,
                     MaterialPageRoute(
                       builder: (context) =>
-                          UI_RaceClasses(classes[index]["_id"]),
+                          //UI_RaceClasses(classes[index]["_id"]),
+                          UI_Race(classes[index]["_id"], classes[index]["race_name"]),
                     ),
                   );
                 },
