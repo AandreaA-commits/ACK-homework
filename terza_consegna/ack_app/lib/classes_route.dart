@@ -41,7 +41,7 @@ class _ClassesRouteState extends State<ClassesRoute> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Classes'),
+        title: const Text('Classes 1'),
       ),
       body: Center(
         child: FutureBuilder<List<String>>(
