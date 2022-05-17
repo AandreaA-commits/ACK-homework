@@ -42,6 +42,34 @@ Future<List<Map<String, dynamic>>> fetchClassResults(String raceid, String class
   } else {
     // If the server did not return a 200 OK response,
     // then throw an exception.
-    throw Exception('Failed to load classes');
+    throw Exception('Failed to load classes\'s athletes');
+  }
+}
+
+Future<List<Map<String, dynamic>>> fetchClubs(String raceid) async {
+  final response = await http.get(Uri.parse('$apiUrl/list_organisations?id=$raceid'));
+
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
+    return List<Map<String, dynamic>>.from(jsonDecode(response.body));
+  } else {
+    // If the server did not return a 200 OK response,
+    // then throw an exception.
+    throw Exception('Failed to load clubs');
+  }
+}
+
+Future<List<Map<String, dynamic>>> fetchClubsResults(String raceid, String clubsid) async {
+  final response = await http.get(Uri.parse('$apiUrl/results?id=$raceid&organisation=$clubsid'));
+
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
+    return List<Map<String, dynamic>>.from(jsonDecode(response.body));
+  } else {
+    // If the server did not return a 200 OK response,
+    // then throw an exception.
+    throw Exception('Failed to load clubs\'s atheletes' );
   }
 }
