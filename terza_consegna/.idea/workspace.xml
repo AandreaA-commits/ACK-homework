@@ -5,13 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d0231dc1-f019-4e62-aa46-fa7f941630a4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/ack_app/lib/pages/ui_clubs.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ack_app/lib/pages/ui_clubsresults.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ack_app/lib/api.dart" beforeDir="false" afterPath="$PROJECT_DIR$/ack_app/lib/api.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ack_app/lib/pages/ui_race.dart" beforeDir="false" afterPath="$PROJECT_DIR$/ack_app/lib/pages/ui_race.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ack_app/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/ack_app/lib/main.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
