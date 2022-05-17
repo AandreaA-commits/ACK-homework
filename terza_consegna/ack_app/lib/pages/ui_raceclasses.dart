@@ -21,24 +21,33 @@ class _RaceClassesState extends State<UI_RaceClasses> {
 
   @override
   Widget build(BuildContext context) {
-    return _getScaffold(futureClasses, widget.raceid);
+    return _getScaffold(this, futureClasses, widget.raceid);
+  }
+
+  Future<void> refresh() async
+  {
+    futureClasses = fetchClasses(widget.raceid);
+    //await Future.delayed(Duration(seconds: 3));
+    super.setState(() {
+    });
   }
 }
 
-Scaffold _getScaffold(Future<List<String>> futureClasses, String raceid)
+Scaffold _getScaffold(_RaceClassesState parent, Future<List<String>> futureClasses, String raceid)
 {
   return Scaffold(
     appBar: AppBar(
       title: const Text('Categorie'),
     ),
     body: RefreshIndicator(
-      onRefresh: () => fetchClasses(raceid),
+      onRefresh: () async {
+        return await parent.refresh();
+        },
       child: FutureBuilder<List<String>>(
         future: futureClasses,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             List<String> classes = snapshot.data!;
-            print(snapshot.data);
             return ListView.builder(
               itemCount: classes.length,
               itemBuilder: ((context, index) => ElevatedButton( //Text(classes[index])));
@@ -64,6 +73,4 @@ Scaffold _getScaffold(Future<List<String>> futureClasses, String raceid)
       ),
     ),
   );
-
 }
-
