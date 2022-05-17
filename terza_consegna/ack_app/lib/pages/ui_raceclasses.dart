@@ -25,19 +25,20 @@ class _RaceClassesState extends State<UI_RaceClasses> {
   }
 }
 
-
 Scaffold _getScaffold(Future<List<String>> futureClasses, String raceid)
 {
   return Scaffold(
     appBar: AppBar(
       title: const Text('Categorie'),
     ),
-    body: Center(
+    body: RefreshIndicator(
+      onRefresh: () => fetchClasses(raceid),
       child: FutureBuilder<List<String>>(
         future: futureClasses,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             List<String> classes = snapshot.data!;
+            print(snapshot.data);
             return ListView.builder(
               itemCount: classes.length,
               itemBuilder: ((context, index) => ElevatedButton( //Text(classes[index])));
@@ -65,3 +66,4 @@ Scaffold _getScaffold(Future<List<String>> futureClasses, String raceid)
   );
 
 }
+
