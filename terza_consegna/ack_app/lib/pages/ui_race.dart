@@ -1,5 +1,7 @@
 import 'package:ack_app/pages/ui_raceclasses.dart';
 import 'package:ack_app/pages/ui_clubs.dart';
+import 'package:ack_app/pages/ui_racestartlists.dart';
+import 'package:ack_app/pages/ui_startlist.dart';
 import 'package:flutter/material.dart';
 import './ui_home.dart';
 
@@ -30,6 +32,9 @@ class _RaceState extends State<UI_Race> {
 
     routeWidgets.add(UI_Clubs(widget.raceId));
     routeTitles.add("Clubs");
+
+    routeWidgets.add(UI_RaceStartLists(widget.raceId));
+    routeTitles.add("Start List");
 
     return _getScaffold(widget.raceName, widget.raceId, routeWidgets, routeTitles);
   }

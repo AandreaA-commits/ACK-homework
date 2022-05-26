@@ -69,9 +69,9 @@ Scaffold _getScaffold(Future<List<Map<String, dynamic>>> futureRaces, BuildConte
         children: [
           const DrawerHeader(
             decoration: BoxDecoration(
-              color: Colors.blue,
+              color: Colors.deepPurple,
             ),
-            child: Text('PROGETTO TCM'),
+            child: Text('PROGETTO TCM', style: TextStyle(color: Colors.white, fontSize: 20)),
           ),
           ListTile(
             title: const Text('Credits'),

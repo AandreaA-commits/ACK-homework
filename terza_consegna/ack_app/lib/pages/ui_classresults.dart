@@ -21,14 +21,14 @@ class _ClassResultsState extends State<UI_ClassResults> {
 
   @override
   Widget build(BuildContext context) {
-    return _getScaffold(futureClassResults);
+    return _getScaffold(futureClassResults, widget.classid);
   }
 }
 
-Scaffold _getScaffold(Future<List<Map<String, dynamic>>> futureClassResults) {
+Scaffold _getScaffold(Future<List<Map<String, dynamic>>> futureClassResults, String classid) {
   return Scaffold(
       appBar: AppBar(
-        title: const Text('classifica degli atleti'),
+        title: Text('Classifica degli atleti - ' + classid),
       ),
       body: Center(
           child: FutureBuilder<List<Map<String, dynamic>>>(

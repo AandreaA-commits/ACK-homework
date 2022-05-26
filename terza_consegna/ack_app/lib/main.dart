@@ -14,6 +14,7 @@ void main() {
     title: 'Ori Live Results',
     theme:  ThemeData(
         primarySwatch: Colors.deepPurple,//Color.fromRGBO(37, 7, 107, 1.0),
+        scaffoldBackgroundColor: Colors.yellow
     ),
     home: UI_Home(),
   ));

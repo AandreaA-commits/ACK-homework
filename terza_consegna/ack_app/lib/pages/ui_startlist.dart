@@ -1,38 +1,38 @@
 import 'package:flutter/material.dart';
 import '../api.dart';
 
-class UI_ClubsResults extends StatefulWidget {
-  final String clubsid;
+class UI_StartList extends StatefulWidget {
   final String raceid;
-  const UI_ClubsResults(this.raceid, this.clubsid, {Key? key}) : super(key: key);
+  final String classid;
+  const UI_StartList(this.raceid, this.classid, {Key? key}) : super(key: key);
 
   @override
-  _ClubsResultsState createState() => _ClubsResultsState();
+  _StartListState createState() => _StartListState();
 }
 
-class _ClubsResultsState extends State<UI_ClubsResults> {
-  late Future<List<Map<String, dynamic>>> futureClubsResults;
+class _StartListState extends State<UI_StartList> {
+  late Future<List<Map<String, dynamic>>> futureStartList;
 
   @override
   void initState() {
     super.initState();
-    futureClubsResults = fetchClubsResults(widget.raceid, widget.clubsid);
+    futureStartList = fetchStartList(widget.raceid, widget.classid);
   }
 
   @override
   Widget build(BuildContext context) {
-    return _getScaffold(futureClubsResults, widget.clubsid);
+    return _getScaffold(futureStartList, widget.classid);
   }
 }
 
-Scaffold _getScaffold(Future<List<Map<String, dynamic>>> futureClubsResults, String clubsid) {
+Scaffold _getScaffold(Future<List<Map<String, dynamic>>> futureStartList, String classid) {
   return Scaffold(
       appBar: AppBar(
-        title: Text('Atleti del club - ' + clubsid),
+        title: Text("Start list - " + classid),
       ),
       body: Center(
           child: FutureBuilder<List<Map<String, dynamic>>>(
-            future: futureClubsResults,
+            future: futureStartList,
             builder: (context, snapshot){
               if (snapshot.hasData) {
                 var athletes = snapshot.data!;
@@ -48,19 +48,11 @@ Scaffold _getScaffold(Future<List<Map<String, dynamic>>> futureClubsResults, Str
                             children: [
                               Expanded(
                                 flex: 1,
-                                child: Text(athletes[index]["position"], style: TextStyle(fontSize: 15),),
+                                child: Text(athletes[index]["name"], style: TextStyle(fontSize: 15),),
                               ),
                               Expanded(
                                 flex: 2,
                                 child: Text(athletes[index]["surname"], style: TextStyle(fontSize: 15),),
-                              ),
-                              Expanded(
-                                flex: 2,
-                                child: Text(athletes[index]["name"], style: TextStyle(fontSize: 15),),
-                              ),
-                              Expanded(
-                                flex: 1,
-                                child: Text(athletes[index]["time"], style: TextStyle(fontSize: 15),),
                               ),
                             ]
                         )
