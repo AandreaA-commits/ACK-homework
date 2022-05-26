@@ -82,7 +82,7 @@ Scaffold _getScaffold(Future<List<Map<String, dynamic>>> futureRaces, BuildConte
             },
           ),
           ListTile(
-            title: const Text('Item 2'),
+            title: const Text('UPLOAD'),
             onTap: () {
               // Update the state of the app.
               // ...
