@@ -21,18 +21,78 @@ class _HomeState extends State<UI_Home> {
 
   @override
   Widget build(BuildContext context) {
-    return _getScaffold(futureRaces);
+    return _getScaffold(futureRaces, context);
   }
+}
+
+showAlertDialog(BuildContext context) {
+
+  // set up the button
+  Widget okButton = TextButton(
+    child: Text("OK"),
+    onPressed: () {
+      Navigator.of(context).pop();
+    },
+  );
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: Text("GRAZIE DAL TEAM ACK"),
+    content: Text("Iqbal, Andrea, Fabio"),
+    actions: [
+      okButton,
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }
 
 
 
-Scaffold _getScaffold(Future<List<Map<String, dynamic>>> futureRaces)
+Scaffold _getScaffold(Future<List<Map<String, dynamic>>> futureRaces, BuildContext context)
 {
   return Scaffold(
     appBar: AppBar(
       title: const Text('Available races'),
     ),
+
+    drawer: Drawer(
+      child: ListView(
+        // Important: Remove any padding from the ListView.
+        padding: EdgeInsets.zero,
+        children: [
+          const DrawerHeader(
+            decoration: BoxDecoration(
+              color: Colors.blue,
+            ),
+            child: Text('PROGETTO TCM'),
+          ),
+          ListTile(
+            title: const Text('Credits'),
+            onTap: () {
+              // Update the state of the app.
+              showAlertDialog(context);
+              //Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            title: const Text('Item 2'),
+            onTap: () {
+              // Update the state of the app.
+              // ...
+             // Navigator.pop(context);
+            },
+          ),
+        ],
+      ),
+    ),
+
     body: Center(
       child: FutureBuilder<List<Map<String, dynamic>>>(
         future: futureRaces,
