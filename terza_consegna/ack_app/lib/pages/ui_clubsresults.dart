@@ -4,7 +4,8 @@ import '../api.dart';
 class UI_ClubsResults extends StatefulWidget {
   final String clubsid;
   final String raceid;
-  const UI_ClubsResults(this.raceid, this.clubsid, {Key? key}) : super(key: key);
+  final String clubname;
+  const UI_ClubsResults(this.raceid, this.clubsid, this.clubname, {Key? key}) : super(key: key);
 
   @override
   _ClubsResultsState createState() => _ClubsResultsState();
@@ -21,14 +22,14 @@ class _ClubsResultsState extends State<UI_ClubsResults> {
 
   @override
   Widget build(BuildContext context) {
-    return _getScaffold(futureClubsResults, widget.clubsid);
+    return _getScaffold(futureClubsResults, widget.clubname);
   }
 }
 
-Scaffold _getScaffold(Future<List<Map<String, dynamic>>> futureClubsResults, String clubsid) {
+Scaffold _getScaffold(Future<List<Map<String, dynamic>>> futureClubsResults, String clubname) {
   return Scaffold(
       appBar: AppBar(
-        title: Text('Atleti del club - ' + clubsid),
+        title: Text('Atleti del club - ' + clubname),
       ),
       body: Center(
           child: FutureBuilder<List<Map<String, dynamic>>>(

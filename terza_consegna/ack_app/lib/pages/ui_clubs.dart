@@ -65,7 +65,7 @@ Scaffold _getScaffold(Future<List<Map<String, dynamic>>>  futureClubs, String ra
                     context,
                     MaterialPageRoute(
                       builder: (context) =>
-                         UI_ClubsResults(raceid, clubs[index]["id"]),
+                         UI_ClubsResults(raceid, clubs[index]["id"], clubs[index]["name"]),
                     ),
                   );
                 },

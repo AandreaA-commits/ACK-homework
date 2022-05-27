@@ -4,7 +4,8 @@ import '../api.dart';
 class UI_StartList extends StatefulWidget {
   final String raceid;
   final String classid;
-  const UI_StartList(this.raceid, this.classid, {Key? key}) : super(key: key);
+  final String classname;
+  const UI_StartList(this.raceid, this.classid, this.classname, {Key? key}) : super(key: key);
 
   @override
   _StartListState createState() => _StartListState();
@@ -21,14 +22,14 @@ class _StartListState extends State<UI_StartList> {
 
   @override
   Widget build(BuildContext context) {
-    return _getScaffold(futureStartList, widget.classid);
+    return _getScaffold(futureStartList, widget.classid, widget.classname);
   }
 }
 
-Scaffold _getScaffold(Future<List<Map<String, dynamic>>> futureStartList, String classid) {
+Scaffold _getScaffold(Future<List<Map<String, dynamic>>> futureStartList, String classid, String classname) {
   return Scaffold(
       appBar: AppBar(
-        title: Text("Start list - " + classid),
+        title: Text("Start list - " + classname),
       ),
       body: Center(
           child: FutureBuilder<List<Map<String, dynamic>>>(

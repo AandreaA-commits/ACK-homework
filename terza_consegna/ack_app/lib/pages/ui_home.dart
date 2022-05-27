@@ -81,14 +81,6 @@ Scaffold _getScaffold(Future<List<Map<String, dynamic>>> futureRaces, BuildConte
               //Navigator.pop(context);
             },
           ),
-          ListTile(
-            title: const Text('Item 2'),
-            onTap: () {
-              // Update the state of the app.
-              // ...
-             // Navigator.pop(context);
-            },
-          ),
         ],
       ),
     ),
